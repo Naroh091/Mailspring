@@ -106,10 +106,7 @@ class FeatureUsageStore extends MailspringStore {
 
   isUsable(feature) {
     const { usedInPeriod, quota } = this._dataForFeature(feature);
-    if (!quota) {
-      return true;
-    }
-    return usedInPeriod < quota;
+    return true;
   }
 
   async markUsedOrUpgrade(feature, lexicon = {}) {

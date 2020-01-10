@@ -101,17 +101,13 @@ class KeyManager {
 
   _reportFatalError(err: Error) {
     let more = '';
-    if (process.platform === 'linux') {
-      more = localized('Make sure you have `libsecret` installed and a keyring is present. ');
-    }
+    // if (process.platform === 'linux') {
+      more = err.message;
+    // }
     remote.dialog.showMessageBox({
       type: 'error',
       buttons: [localized('Quit')],
-      message: localized(
-        `Mailspring could not store your password securely. %@ For more information, visit %@`,
-        more,
-        'http://support.getmailspring.com/hc/en-us/articles/115001875571'
-      ),
+      message: err.message + " " + err.name,
     });
 
     // tell the app to exit and rethrow the error to ensure code relying
